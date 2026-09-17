@@ -13,9 +13,7 @@ class MiniCricketApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mini Cricket',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const CricketScreen(),
     );
   }
@@ -33,7 +31,6 @@ class _CricketScreenState extends State<CricketScreen> {
   int remainingBalls = 6;
   String currentStatus = '';
 
-  // Possible runs per ball (0 included as per the 'No Runs' in your image)
   final List<int> possibleRuns = [0, 1, 2, 3, 4, 6];
   final Random random = Random();
 
@@ -42,7 +39,7 @@ class _CricketScreenState extends State<CricketScreen> {
       setState(() {
         // Generate a random score from the list
         int runsScored = possibleRuns[random.nextInt(possibleRuns.length)];
-        
+
         totalRuns += runsScored;
         remainingBalls -= 1;
 
@@ -71,7 +68,10 @@ class _CricketScreenState extends State<CricketScreen> {
     return Scaffold(
       backgroundColor: Colors.blue[700],
       appBar: AppBar(
-        title: const Text('Mini Cricket', style: TextStyle(color: Colors.white)),
+        title: const Text(
+          'Mini Cricket',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.blue[900],
         centerTitle: true,
       ),
@@ -83,20 +83,50 @@ class _CricketScreenState extends State<CricketScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildImagePlaceholder(Icons.sports_cricket, Colors.brown), // Bat placeholder
+                _buildImagePlaceholder(
+                  Icons.sports_cricket,
+                  Colors.brown,
+                ), // Bat placeholder
                 const SizedBox(width: 20),
-                _buildImagePlaceholder(Icons.sports_baseball, Colors.red), // Ball placeholder
+                _buildImagePlaceholder(
+                  Icons.sports_baseball,
+                  Colors.red,
+                ), // Ball placeholder
               ],
             ),
             const SizedBox(height: 30),
-            
+
             // Runs and Balls Labels
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                SizedBox(width: 80, child: Center(child: Text('Runs', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)))),
+                SizedBox(
+                  width: 80,
+                  child: Center(
+                    child: Text(
+                      'Runs',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(width: 20),
-                SizedBox(width: 80, child: Center(child: Text('Balls', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)))),
+                SizedBox(
+                  width: 80,
+                  child: Center(
+                    child: Text(
+                      'Balls',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 10),
@@ -105,9 +135,33 @@ class _CricketScreenState extends State<CricketScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(width: 80, child: Center(child: Text('$totalRuns', style: const TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)))),
+                SizedBox(
+                  width: 80,
+                  child: Center(
+                    child: Text(
+                      '$totalRuns',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
                 const SizedBox(width: 20),
-                SizedBox(width: 80, child: Center(child: Text('$remainingBalls', style: const TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)))),
+                SizedBox(
+                  width: 80,
+                  child: Center(
+                    child: Text(
+                      '$remainingBalls',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 40),
@@ -116,17 +170,26 @@ class _CricketScreenState extends State<CricketScreen> {
             if (currentStatus.isNotEmpty)
               Text(
                 currentStatus,
-                style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            
+
             const SizedBox(height: 20),
 
             // Action Button (Bat or Restart)
             ElevatedButton(
               onPressed: remainingBalls > 0 ? bat : restart,
               style: ElevatedButton.styleFrom(
-                backgroundColor: remainingBalls > 0 ? Colors.blue[900] : Colors.red,
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                backgroundColor: remainingBalls > 0
+                    ? Colors.blue[900]
+                    : Colors.red,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 10,
+                ),
               ),
               child: Text(
                 remainingBalls > 0 ? 'Bat' : 'Restart',
@@ -145,13 +208,7 @@ class _CricketScreenState extends State<CricketScreen> {
       width: 100,
       height: 100,
       color: Colors.white,
-      child: Center(
-        child: Icon(
-          icon,
-          size: 60,
-          color: iconColor,
-        ),
-      ),
+      child: Center(child: Icon(icon, size: 60, color: iconColor)),
     );
   }
 }
